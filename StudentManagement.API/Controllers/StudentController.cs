@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentManagement.API.Services;
 
 namespace StudentManagement.API.Controllers
 {
@@ -6,10 +7,15 @@ namespace StudentManagement.API.Controllers
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
+        private readonly IStudentService _studentService;
+        public StudentController(IStudentService studentService)
+        {
+            _studentService = studentService;
+        }
         [HttpGet]
         public IActionResult GetStudents()
         {
-            return Ok("welcome to student management system");
+            return Ok(_studentService.GetWelcomeMessage());
         }
 
     }
