@@ -5,15 +5,14 @@ namespace StudentManagement.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentController : ControllerBase
+public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
-        public StudentController(IStudentService studentService)
-        {
-            _studentService = studentService;
+        public StudentController(IStudentService studentService) { 
+         _studentService = studentService;
         }
         [HttpGet]
-        public IActionResult GetStudents()
+        public IActionResult GetStudent()
         {
             return Ok(_studentService.GetWelcomeMessage());
         }
