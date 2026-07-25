@@ -1,7 +1,9 @@
-﻿namespace StudentManagement.API.Repositories
+﻿using StudentManagement.API.Models;
+
+namespace StudentManagement.API.Repositories
 {
     public interface IStudentRepository
     {
-        string GetWelcomeMessage();
+        List<Student> GetStudents();
     }
 }

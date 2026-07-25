@@ -1,4 +1,5 @@
-﻿using StudentManagement.API.Repositories;
+﻿using StudentManagement.API.Models;
+using StudentManagement.API.Repositories;
 
 namespace StudentManagement.API.Services
 {
@@ -9,9 +10,9 @@ namespace StudentManagement.API.Services
         {
             _studentRepository = studentRepository;
         }
-        public string GetWelcomeMessage()
+        public List<Student> GetStudents()
         {
-            return (_studentRepository.GetWelcomeMessage());
+            return (_studentRepository.GetStudents());
         }
     }
 }

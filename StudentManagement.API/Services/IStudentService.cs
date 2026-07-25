@@ -1,7 +1,8 @@
-﻿namespace StudentManagement.API.Services
+﻿using StudentManagement.API.Models;
+namespace StudentManagement.API.Services
 {
     public interface IStudentService
     {
-        string GetWelcomeMessage();
+        List<Student> GetStudents();
     }
 }

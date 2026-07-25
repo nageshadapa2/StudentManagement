@@ -1,11 +1,34 @@
-﻿namespace StudentManagement.API.Repositories
+﻿using StudentManagement.API.Models;
+
+namespace StudentManagement.API.Repositories
 {
-    public class StudentRepository: IStudentRepository
+    public class StudentRepository : IStudentRepository
     {
-      
-        public string GetWelcomeMessage()
+
+        private static readonly List<Student> _students = new()
+{
+    new Student
+    {
+                 Id = 1,
+                Name = "ram",
+                Age = 31,
+                Email = "ram@gmail.com"
+    },
+    new Student
+    {
+                         Id = 2,
+                Name = "sam",
+                Age = 32,
+                Email = "sam@gmail.com"
+
+    }
+
+};
+
+
+        public List<Student> GetStudents()
         {
-            return "welcome repository";
+            return _students;
 
         }
     }

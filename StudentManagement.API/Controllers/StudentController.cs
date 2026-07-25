@@ -14,7 +14,8 @@ public class StudentController : ControllerBase
         [HttpGet]
         public IActionResult GetStudent()
         {
-            return Ok(_studentService.GetWelcomeMessage());
+            var students = _studentService.GetStudents();
+            return Ok(students);
         }
 
     }
