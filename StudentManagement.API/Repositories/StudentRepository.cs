@@ -9,17 +9,18 @@ namespace StudentManagement.API.Repositories
 {
     new Student
     {
-                 Id = 1,
-                Name = "ram",
-                Age = 31,
-                Email = "ram@gmail.com"
-    },
-    new Student
-    {
-                         Id = 2,
+                Id = 1,
                 Name = "sam",
                 Age = 32,
                 Email = "sam@gmail.com"
+    },
+    new Student
+    {
+
+                Id = 2,
+                Name = "nag",
+                Age = 31,
+                Email = "nag@gmail.com"
 
     }
 
@@ -31,5 +32,40 @@ namespace StudentManagement.API.Repositories
             return _students;
 
         }
+
+        public Student? GetStudentById(int id)
+        {
+            return _students.FirstOrDefault(s => s.Id == id);
+
+        }
+
+        public void AddStudent(Student student)
+        {
+            _students.Add(student);
+        }
+
+        public bool DeleteStudent(int id)
+        {
+            var student = _students.FirstOrDefault(s => s.Id == id);
+            if (student == null)
+             return false;
+            _students.Remove(student);
+            return true;
+
+        }
+
+        public bool UpdateStudent(Student student)
+        {
+            var existingStudent = _students.FirstOrDefault(s => s.Id == student.Id);
+                if (existingStudent == null)
+                return false;
+            existingStudent.Name = student.Name;
+            existingStudent.Age = student.Age;
+            existingStudent.Email = student.Email;
+
+            return true;
+
+        }
+
     }
 }

@@ -14,5 +14,24 @@ namespace StudentManagement.API.Services
         {
             return (_studentRepository.GetStudents());
         }
-    }
+
+        public Student? GetStudentById(int id)
+        {
+            return _studentRepository.GetStudentById(id);
+        }
+        public void AddStudent(Student student)
+        {
+            _studentRepository.AddStudent(student);
+        }
+
+        public bool UpdateStudent(Student student)
+        {
+            return _studentRepository.UpdateStudent(student);
+        }
+        public bool DeleteStudent(int id)
+        {
+            return _studentRepository.DeleteStudent(id);
+        }
+
+        }
 }
