@@ -1,4 +1,5 @@
 ﻿using StudentManagement.API.Models;
+using StudentManagement.API.DTOs;
 
 namespace StudentManagement.API.Repositories
 {
@@ -11,21 +12,18 @@ namespace StudentManagement.API.Repositories
     {
                 Id = 1,
                 Name = "sam",
-                Age = 32,
+                Age = 27,
                 Email = "sam@gmail.com"
     },
     new Student
     {
-
                 Id = 2,
                 Name = "nag",
-                Age = 31,
+                Age = 28,
                 Email = "nag@gmail.com"
-
     }
 
 };
-
 
         public List<Student> GetStudents()
         {
@@ -57,12 +55,11 @@ namespace StudentManagement.API.Repositories
         public bool UpdateStudent(Student student)
         {
             var existingStudent = _students.FirstOrDefault(s => s.Id == student.Id);
-                if (existingStudent == null)
-                return false;
+            if (existingStudent == null)
+            return false;
             existingStudent.Name = student.Name;
             existingStudent.Age = student.Age;
             existingStudent.Email = student.Email;
-
             return true;
 
         }

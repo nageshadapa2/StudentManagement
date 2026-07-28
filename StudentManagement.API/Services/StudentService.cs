@@ -1,5 +1,6 @@
 ﻿using StudentManagement.API.Models;
 using StudentManagement.API.Repositories;
+using StudentManagement.API.DTOs;
 
 namespace StudentManagement.API.Services
 {
@@ -10,9 +11,16 @@ namespace StudentManagement.API.Services
         {
             _studentRepository = studentRepository;
         }
-        public List<Student> GetStudents()
+        public List<StudentResponseDto> GetStudents()
         {
-            return (_studentRepository.GetStudents());
+            var students = _studentRepository.GetStudents();
+
+            return students.Select(student => new StudentResponseDto
+            {
+                Id = student.Id,
+                Name = student.Name,
+                Email = student.Email
+            }).ToList();
         }
 
         public Student? GetStudentById(int id)

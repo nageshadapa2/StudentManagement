@@ -1,9 +1,10 @@
-﻿using StudentManagement.API.Models;
+﻿using StudentManagement.API.DTOs;
+using StudentManagement.API.Models;
 namespace StudentManagement.API.Services
 {
     public interface IStudentService
     {
-        List<Student> GetStudents();
+        List<StudentResponseDto> GetStudents();
 
         Student? GetStudentById(int id);
 
