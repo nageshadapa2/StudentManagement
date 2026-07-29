@@ -8,7 +8,7 @@ namespace StudentManagement.API.Services
 
         Student? GetStudentById(int id);
 
-        void AddStudent(Student student);
+        void AddStudent(CreateStudentRequestDto dto);
 
         bool UpdateStudent(Student student);
 

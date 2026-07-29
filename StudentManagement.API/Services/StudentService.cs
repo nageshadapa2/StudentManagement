@@ -27,8 +27,15 @@ namespace StudentManagement.API.Services
         {
             return _studentRepository.GetStudentById(id);
         }
-        public void AddStudent(Student student)
+        public void AddStudent(CreateStudentRequestDto dto)
         {
+            var student = new Student
+            {
+                Name = dto.Name,
+                Age = dto.Age,
+                Email = dto.Email
+            };
+
             _studentRepository.AddStudent(student);
         }
 

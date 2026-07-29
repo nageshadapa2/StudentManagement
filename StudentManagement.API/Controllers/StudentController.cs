@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentManagement.API.Services;
 using StudentManagement.API.Models;
+using StudentManagement.API.DTOs;
 
 namespace StudentManagement.API.Controllers
 {
@@ -29,10 +30,14 @@ public class StudentController : ControllerBase
         }
 
         [HttpPost]
-        public IActionResult AddStudent(Student student)
+        public IActionResult AddStudent(CreateStudentRequestDto dto)
         {
-            _studentService.AddStudent(student);
-            return Ok("Student added successfully");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            _studentService.AddStudent(dto);
+            return Ok("Student Added Successfully");
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteStudent(int id)
