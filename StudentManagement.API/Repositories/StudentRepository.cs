@@ -48,7 +48,7 @@ namespace StudentManagement.API.Repositories
             if (student == null)
              return false;
             _students.Remove(student);
-            return true;
+             return true;
 
         }
 

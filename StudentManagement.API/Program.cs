@@ -1,3 +1,4 @@
+using StudentManagement.API.Middleware;
 using StudentManagement.API.Repositories;
 using StudentManagement.API.Services;
 
@@ -21,7 +22,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

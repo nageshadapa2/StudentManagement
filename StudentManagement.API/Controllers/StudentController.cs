@@ -24,7 +24,7 @@ public class StudentController : ControllerBase
         {
             var student = _studentService.GetStudentById(id);
             if (student == null)
-                return NotFound();
+            return NotFound();
             return Ok(student);
 
         }
@@ -57,6 +57,11 @@ public class StudentController : ControllerBase
                 return NotFound();
 
             return Ok("Student Updated Successfully");
+        }
+        [HttpGet("error")]
+        public IActionResult GetError()
+        {
+            throw new Exception("This is a test exception.");
         }
 
     }
