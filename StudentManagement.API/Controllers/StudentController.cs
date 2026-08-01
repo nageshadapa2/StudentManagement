@@ -9,15 +9,27 @@ namespace StudentManagement.API.Controllers
     [Route("api/[controller]")]
 public class StudentController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
         private readonly IStudentService _studentService;
         private readonly ILogger<StudentController> _logger;
-        public StudentController(IStudentService studentService, ILogger<StudentController> logger) { 
+        public StudentController(IStudentService studentService, ILogger<StudentController> logger, IConfiguration configuration) { 
          _studentService = studentService;
             _logger = logger;
+            _configuration = configuration;
+
+
+
         }
         [HttpGet]
         public IActionResult GetStudents()
         {
+            string connectionString =
+_configuration.GetConnectionString("DefaultConnection");
+            string appName =
+_configuration["ApiSettings:ApplicationName"];
+            _logger.LogInformation("Connection String: {ConnectionString}", connectionString);
+
+            _logger.LogInformation("Application Name: {AppName}", appName);
             _logger.LogInformation("Fetching all students");
             return Ok(_studentService.GetStudents());
         }
