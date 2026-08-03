@@ -13,5 +13,7 @@ namespace StudentManagement.API.Services
         bool UpdateStudent(Student student);
 
         bool DeleteStudent(int id);
+
+        Guid GetGuid();
     }
 }

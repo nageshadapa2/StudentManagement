@@ -12,8 +12,8 @@ namespace StudentManagement.API.Repositories
     {
                 Id = 1,
                 Name = "sam",
-                Age = 27,
-                Email = "sam@gmail.com"
+                Age = 27
+                //Email = "sam@gmail.com"
     },
     new Student
     {

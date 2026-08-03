@@ -7,9 +7,11 @@ namespace StudentManagement.API.Services
     public class StudentService: IStudentService
     {
         private readonly IStudentRepository _studentRepository;
-        public StudentService(IStudentRepository studentRepository)
+        private readonly GuidService _guidSercice;
+        public StudentService(IStudentRepository studentRepository, GuidService guidSercice)
         {
             _studentRepository = studentRepository;
+            _guidSercice = guidSercice;
         }
         public List<StudentResponseDto> GetStudents()
         {
@@ -47,6 +49,10 @@ namespace StudentManagement.API.Services
         {
             return _studentRepository.DeleteStudent(id);
         }
-
+        public Guid GetGuid()
+        {
+            return _guidSercice.Id;
         }
+
+    }
 }

@@ -12,10 +12,12 @@ public class StudentController : ControllerBase
         private readonly IConfiguration _configuration;
         private readonly IStudentService _studentService;
         private readonly ILogger<StudentController> _logger;
-        public StudentController(IStudentService studentService, ILogger<StudentController> logger, IConfiguration configuration) { 
+        private readonly GuidService _guidService;
+        public StudentController(IStudentService studentService, ILogger<StudentController> logger, IConfiguration configuration, GuidService guidService) { 
          _studentService = studentService;
             _logger = logger;
             _configuration = configuration;
+            _guidService = guidService;
 
 
 
@@ -31,7 +33,12 @@ _configuration["ApiSettings:ApplicationName"];
 
             _logger.LogInformation("Application Name: {AppName}", appName);
             _logger.LogInformation("Fetching all students");
-            return Ok(_studentService.GetStudents());
+            return Ok(new
+            {
+                ControllerGuid = _guidService.Id,
+                ServiceGuid = _studentService.GetGuid()
+            });
+
         }
 
         [HttpGet("{id}")]
@@ -43,8 +50,7 @@ _configuration["ApiSettings:ApplicationName"];
                 _logger.LogWarning("Student with id {Id} not found", id);
                 return NotFound();
             }
-            return Ok(student);
-
+            return Ok(_guidService.Id);
         }
 
         [HttpPost]
@@ -81,6 +87,8 @@ _configuration["ApiSettings:ApplicationName"];
         {
             throw new Exception("This is a test exception.");
         }
+
+
 
     }
 }
