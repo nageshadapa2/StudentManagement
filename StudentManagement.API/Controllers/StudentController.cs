@@ -33,12 +33,8 @@ _configuration["ApiSettings:ApplicationName"];
 
             _logger.LogInformation("Application Name: {AppName}", appName);
             _logger.LogInformation("Fetching all students");
-            return Ok(new
-            {
-                ControllerGuid = _guidService.Id,
-                ServiceGuid = _studentService.GetGuid()
-            });
-
+            var student = _studentService.GetStudents();
+            return Ok(student);
         }
 
         [HttpGet("{id}")]
@@ -50,7 +46,7 @@ _configuration["ApiSettings:ApplicationName"];
                 _logger.LogWarning("Student with id {Id} not found", id);
                 return NotFound();
             }
-            return Ok(_guidService.Id);
+            return Ok(student);
         }
 
         [HttpPost]
