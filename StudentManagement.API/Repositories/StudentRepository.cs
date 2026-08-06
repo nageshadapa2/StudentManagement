@@ -41,7 +41,11 @@ namespace StudentManagement.API.Repositories
 
         public List<Student> GetStudents()
         {
-            return _context.Students.ToList();
+            //return _context.Students.ToList();
+            return _context.Students
+    .Where(s => s.Age >= 20)
+    .OrderBy(s => s.Name)
+    .ToList();
 
         }
 
