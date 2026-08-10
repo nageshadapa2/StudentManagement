@@ -4,7 +4,7 @@ namespace StudentManagement.API.Services
 {
     public interface IStudentService
     {
-        List<StudentResponseDto> GetStudents();
+        Task<List<Student>> GetStudentsAsync();
 
         Student? GetStudentById(int id);
 

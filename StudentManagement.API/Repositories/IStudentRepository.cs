@@ -4,7 +4,7 @@ namespace StudentManagement.API.Repositories
 {
     public interface IStudentRepository
     {
-        List<Student> GetStudents();
+        Task<List<Student>> GetStudentsAsync();
         Student? GetStudentById(int id);
         void AddStudent(Student student);
         bool DeleteStudent(int id);

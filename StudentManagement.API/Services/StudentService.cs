@@ -13,16 +13,11 @@ namespace StudentManagement.API.Services
             _studentRepository = studentRepository;
             _guidSercice = guidSercice;
         }
-        public List<StudentResponseDto> GetStudents()
+        public async Task<List<Student>> GetStudentsAsync()
         {
-            var students = _studentRepository.GetStudents();
+            var students = await _studentRepository.GetStudentsAsync();
 
-            return students.Select(student => new StudentResponseDto
-            {
-                Id = student.Id,
-                Name = student.Name,
-                Email = student.Email
-            }).ToList();
+            return students;
         }
 
         public Student? GetStudentById(int id)

@@ -1,4 +1,5 @@
-﻿using StudentManagement.API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentManagement.API.Data;
 using StudentManagement.API.DTOs;
 using StudentManagement.API.Models;
 
@@ -39,13 +40,17 @@ namespace StudentManagement.API.Repositories
 
 //};
 
-        public List<Student> GetStudents()
+        public async Task<List<Student>> GetStudentsAsync()
         {
             //return _context.Students.ToList();
-            return _context.Students
-    .Where(s => s.Age >= 20)
-    .OrderBy(s => s.Name)
-    .ToList();
+          
+           return  await _context.Students
+            .Where(x => x.Age >= 18)
+            .OrderBy(x => x.Name)
+            .Skip(10)
+            .Take(10)
+            .ToListAsync();
+     
 
         }
 
