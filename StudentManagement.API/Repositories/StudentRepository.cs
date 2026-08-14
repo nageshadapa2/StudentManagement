@@ -44,7 +44,7 @@ namespace StudentManagement.API.Repositories
         {
             //return _context.Students.ToList();
           
-           return  await _context.Students
+           return  await _context.Students.Include(s=>s.Department)
             .Where(x => x.Age >= 18)
             .OrderBy(x => x.Name)
             .Skip(10)

@@ -9,11 +9,12 @@
         public int Age { get; set; }
 
         public string Email { get; set; } = string.Empty;
+
         public StudentProfile? Profile { get; set; }
-        public Department Department { get; set; }
 
+        public Department? Department { get; set; }
 
-
+        public int? DepartmentId { get; set; }
     }
 
     public class StudentProfile
