@@ -1,7 +1,7 @@
 ﻿using StudentManagement.API.Models;
 using StudentManagement.API.Repositories;
 using StudentManagement.API.DTOs;
-
+using AutoMapper;
 namespace StudentManagement.API.Services
 {
     public class StudentService: IStudentService
