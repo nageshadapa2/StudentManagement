@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StudentManagement.API.Services;
-using StudentManagement.API.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StudentManagement.API.DTOs;
-
+using StudentManagement.API.Models;
+using StudentManagement.API.Services;
 namespace StudentManagement.API.Controllers
 {
     [ApiController]
@@ -13,15 +13,17 @@ public class StudentController : ControllerBase
         private readonly IStudentService _studentService;
         private readonly ILogger<StudentController> _logger;
         private readonly GuidService _guidService;
-        public StudentController(IStudentService studentService, ILogger<StudentController> logger, IConfiguration configuration, GuidService guidService) { 
+        private readonly IJwtService _jwtService;
+        public StudentController(IStudentService studentService, ILogger<StudentController> logger, IConfiguration configuration, GuidService guidService, IJwtService jwtService) { 
          _studentService = studentService;
             _logger = logger;
             _configuration = configuration;
             _guidService = guidService;
-
+            _jwtService = jwtService;
 
 
         }
+        [Authorize]
         [HttpGet]
          public async Task<IActionResult> GetStudents()
 
@@ -84,7 +86,6 @@ _configuration["ApiSettings:ApplicationName"];
         {
             throw new Exception("This is a test exception.");
         }
-
 
 
     }
