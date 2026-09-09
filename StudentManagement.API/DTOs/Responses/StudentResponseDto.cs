@@ -1,4 +1,4 @@
-﻿namespace StudentManagement.API.DTOs
+﻿namespace StudentManagement.API.DTOs.Responses
 {
     public class StudentResponseDto
     {

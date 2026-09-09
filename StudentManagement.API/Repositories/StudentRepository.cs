@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentManagement.API.Data;
-using StudentManagement.API.DTOs;
+using StudentManagement.API.DTOs.Requests;
+using StudentManagement.API.DTOs.Responses;
 using StudentManagement.API.Models;
 
 namespace StudentManagement.API.Repositories

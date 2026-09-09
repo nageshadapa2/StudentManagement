@@ -1,4 +1,5 @@
-﻿using StudentManagement.API.DTOs;
+﻿using StudentManagement.API.DTOs.Responses;
+using StudentManagement.API.DTOs.Requests;
 using StudentManagement.API.Models;
 namespace StudentManagement.API.Services
 {

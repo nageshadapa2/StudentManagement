@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StudentManagement.API.DTOs;
+using StudentManagement.API.DTOs.Requests;
+using StudentManagement.API.DTOs.Responses;
 using StudentManagement.API.Models;
 using StudentManagement.API.Services;
 namespace StudentManagement.API.Controllers
@@ -85,6 +86,26 @@ _configuration["ApiSettings:ApplicationName"];
         public IActionResult GetError()
         {
             throw new Exception("This is a test exception.");
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register(LoginRequestDto dto)
+        {
+            var hash =
+                BCrypt.Net.BCrypt.HashPassword(dto.Password);
+
+            var user = new User
+            {
+                Email = dto.Email,
+                PasswordHash = hash,
+                Role = "Admin",
+                IsActive = true
+            };
+
+            // Save user through your service/repository
+
+            return Ok();
         }
 
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StudentManagement.API.DTOs
+namespace StudentManagement.API.DTOs.Requests
 {
     public class CreateStudentRequestDto
     {

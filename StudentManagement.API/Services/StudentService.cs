@@ -1,6 +1,8 @@
 ﻿using StudentManagement.API.Models;
 using StudentManagement.API.Repositories;
-using StudentManagement.API.DTOs;
+using StudentManagement.API.DTOs.Requests;
+using StudentManagement.API.DTOs.Responses;
+using StudentManagement.API.Data;
 using AutoMapper;
 namespace StudentManagement.API.Services
 {

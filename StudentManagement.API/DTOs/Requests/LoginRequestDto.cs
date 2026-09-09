@@ -1,4 +1,5 @@
-﻿namespace StudentManagement.API.DTOs
+﻿namespace StudentManagement.API.DTOs.Requests
+
 {
     public class LoginRequestDto
     {

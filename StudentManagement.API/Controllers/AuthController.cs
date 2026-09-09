@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StudentManagement.API.DTOs;
+using StudentManagement.API.DTOs.Requests;
 using StudentManagement.API.Services;
 
 namespace StudentManagement.API.Controllers
@@ -9,32 +9,25 @@ namespace StudentManagement.API.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly IJwtService _jwtService;
+        private readonly IAuthService _authService;
 
-        public AuthController(IJwtService jwtService)
+        public AuthController(IAuthService authService)
         {
-            _jwtService = jwtService;
+            _authService = authService;
         }
 
         [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login(LoginRequestDto dto)
         {
-            if (dto.Email != "admin@gmail.com" ||
-                dto.Password != "123456")
+            var result = _authService.Login(dto);
+
+            if (result == null)
             {
                 return Unauthorized("Invalid email or password");
             }
 
-            var token = _jwtService.GenerateToken(
-                1,
-                dto.Email,
-                "Admin");
-
-            return Ok(new LoginResponseDto
-            {
-                Token = token
-            });
+            return Ok(result);
         }
     }
 }
