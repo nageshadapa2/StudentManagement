@@ -29,5 +29,14 @@ namespace StudentManagement.API.Controllers
 
             return Ok(result);
         }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register(RegisterRequestDto dto)
+        {
+            _authService.Register(dto);
+
+            return Ok("User registered successfully");
+        }
     }
 }

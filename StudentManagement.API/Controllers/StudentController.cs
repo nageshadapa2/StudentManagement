@@ -4,6 +4,8 @@ using StudentManagement.API.DTOs.Requests;
 using StudentManagement.API.DTOs.Responses;
 using StudentManagement.API.Models;
 using StudentManagement.API.Services;
+using StudentManagement.API.DTOs;
+
 namespace StudentManagement.API.Controllers
 {
     [ApiController]
@@ -48,18 +50,29 @@ _configuration["ApiSettings:ApplicationName"];
             if (student == null)
             {
                 _logger.LogWarning("Student with id {Id} not found", id);
-                return NotFound();
+                return NotFound(new ApiResponse<object>
+                {
+                    Success = false,
+                    Message = "Student not found",
+                    Data = null
+                });
             }
-            return Ok(student);
+            return Ok(new ApiResponse<Student>
+            {
+                Success = true,
+                Message = "Student retrieved successfully",
+                Data = student
+            });
         }
 
         [HttpPost]
         public IActionResult AddStudent(CreateStudentRequestDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}  --  [ApiController]- will throw automaticallly- automatic model validation
+
             _studentService.AddStudent(dto);
             return Ok("Student Added Successfully");
         }
@@ -86,26 +99,6 @@ _configuration["ApiSettings:ApplicationName"];
         public IActionResult GetError()
         {
             throw new Exception("This is a test exception.");
-        }
-
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public IActionResult Register(LoginRequestDto dto)
-        {
-            var hash =
-                BCrypt.Net.BCrypt.HashPassword(dto.Password);
-
-            var user = new User
-            {
-                Email = dto.Email,
-                PasswordHash = hash,
-                Role = "Admin",
-                IsActive = true
-            };
-
-            // Save user through your service/repository
-
-            return Ok();
         }
 
 

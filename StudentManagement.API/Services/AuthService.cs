@@ -1,5 +1,6 @@
 ﻿using StudentManagement.API.DTOs.Requests;
 using StudentManagement.API.DTOs.Responses;
+using StudentManagement.API.Models;
 using StudentManagement.API.Repositories;
 
 namespace StudentManagement.API.Services
@@ -50,6 +51,29 @@ namespace StudentManagement.API.Services
             {
                 Token = token
             };
+        }
+
+        public void Register(RegisterRequestDto dto)
+        {
+            var existingUser = _userRepository.GetByEmail(dto.Email);
+
+            if (existingUser != null)
+            {
+                throw new Exception("User already exists");
+            }
+
+            var hash =
+                BCrypt.Net.BCrypt.HashPassword(dto.Password);
+
+            var user = new User
+            {
+                Email = dto.Email,
+                PasswordHash = hash,
+                Role = "Admin",
+                IsActive = true
+            };
+
+            _userRepository.Add(user);
         }
     }
 }

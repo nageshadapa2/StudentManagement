@@ -10,7 +10,6 @@ namespace StudentManagement.API.Mapping
         public MappingProfile()
         {
             CreateMap<Student, StudentResponseDto>();
-
             CreateMap<CreateStudentRequestDto, Student>();
         }
 

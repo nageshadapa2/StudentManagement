@@ -6,6 +6,8 @@ namespace StudentManagement.API.Services
     public interface IAuthService
     {
         LoginResponseDto Login(LoginRequestDto dto);
+        void Register(RegisterRequestDto dto);
+
 
     }
 }
