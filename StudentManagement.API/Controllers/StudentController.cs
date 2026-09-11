@@ -28,7 +28,7 @@ public class StudentController : ControllerBase
         }
         [Authorize]
         [HttpGet]
-         public async Task<IActionResult> GetStudents()
+         public async Task<IActionResult> GetStudents([FromQuery] StudentQueryDto query)
 
         {
             string connectionString =
@@ -39,7 +39,7 @@ _configuration["ApiSettings:ApplicationName"];
 
             _logger.LogInformation("Application Name: {AppName}", appName);
             _logger.LogInformation("Fetching all students");
-            var student = await _studentService.GetStudentsAsync();
+            var student = await _studentService.GetStudentsAsync(query);
             return Ok(student);
         }
 

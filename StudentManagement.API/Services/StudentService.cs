@@ -1,9 +1,10 @@
-﻿using StudentManagement.API.Models;
-using StudentManagement.API.Repositories;
+﻿using AutoMapper;
+using StudentManagement.API.Data;
+using StudentManagement.API.DTOs;
 using StudentManagement.API.DTOs.Requests;
 using StudentManagement.API.DTOs.Responses;
-using StudentManagement.API.Data;
-using AutoMapper;
+using StudentManagement.API.Models;
+using StudentManagement.API.Repositories;
 namespace StudentManagement.API.Services
 {
     public class StudentService: IStudentService
@@ -15,9 +16,9 @@ namespace StudentManagement.API.Services
             _studentRepository = studentRepository;
             _guidSercice = guidSercice;
         }
-        public async Task<List<Student>> GetStudentsAsync()
+        public async Task<List<Student>> GetStudentsAsync(StudentQueryDto query)
         {
-            var students = await _studentRepository.GetStudentsAsync();
+            var students = await _studentRepository.GetStudentsAsync(query);
 
             return students;
         }

@@ -1,9 +1,10 @@
-﻿using StudentManagement.API.Models;
+﻿using StudentManagement.API.DTOs;
+using StudentManagement.API.Models;
 namespace StudentManagement.API.Repositories
 {
     public interface IStudentRepository
     {
-        Task<List<Student>> GetStudentsAsync();
+        Task<List<Student>> GetStudentsAsync(StudentQueryDto query);
         Student? GetStudentById(int id);
         void AddStudent(Student student);
         bool DeleteStudent(int id);

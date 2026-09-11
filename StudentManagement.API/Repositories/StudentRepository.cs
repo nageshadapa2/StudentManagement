@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentManagement.API.Data;
+using StudentManagement.API.DTOs;
 using StudentManagement.API.DTOs.Requests;
 using StudentManagement.API.DTOs.Responses;
 using StudentManagement.API.Models;
@@ -41,17 +42,56 @@ namespace StudentManagement.API.Repositories
 
 //};
 
-        public async Task<List<Student>> GetStudentsAsync()
+        public async Task<List<Student>> GetStudentsAsync(StudentQueryDto query)
         {
             //return _context.Students.ToList();
-          
-           return  await _context.Students.Include(s=>s.Department)
-            .Where(x => x.Age >= 18)
-            .OrderBy(x => x.Name)
-            .Skip(10)
-            .Take(10)
-            .ToListAsync();
-     
+
+            //return  await _context.Students.Include(s=>s.Department)
+            // .Where(x => x.Age >= 18)
+            // .OrderBy(x => x.Name)
+            // .Skip(10)
+            // .Take(10)
+            // .ToListAsync();
+
+
+            var studentsQuery = _context.Students
+               .Include(s => s.Department)
+               .AsQueryable();
+
+            // Search
+            if (!string.IsNullOrWhiteSpace(query.Search))
+            {
+                studentsQuery = studentsQuery
+                    .Where(x => x.Name.Contains(query.Search));
+            }
+
+            // Sorting
+            if (query.SortBy == "name")
+            {
+                if (query.SortDescending)
+                {
+                    studentsQuery = studentsQuery
+                        .OrderByDescending(x => x.Name);
+                }
+                else
+                {
+                    studentsQuery = studentsQuery
+                        .OrderBy(x => x.Name);
+                }
+            }
+            else
+            {
+                studentsQuery = studentsQuery
+                    .OrderBy(x => x.Id);
+            }
+
+            // Pagination
+            studentsQuery = studentsQuery
+                .Skip((query.PageNumber - 1) * query.PageSize)
+                .Take(query.PageSize);
+
+            return await studentsQuery.ToListAsync();
+        
 
         }
 
