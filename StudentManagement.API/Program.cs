@@ -18,7 +18,8 @@ builder.Services.AddControllers();
 // Swagger
 
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.Configure<RouteOptions>(
+    options => options.LowercaseUrls = true);
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo

@@ -23,8 +23,6 @@ public class StudentController : ControllerBase
             _configuration = configuration;
             _guidService = guidService;
             _jwtService = jwtService;
-
-
         }
         [Authorize]
         [HttpGet]
