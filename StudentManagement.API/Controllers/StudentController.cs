@@ -24,7 +24,7 @@ public class StudentController : ControllerBase
             _guidService = guidService;
             _jwtService = jwtService;
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet]
          public async Task<IActionResult> GetStudents([FromQuery] StudentQueryDto query)
 
