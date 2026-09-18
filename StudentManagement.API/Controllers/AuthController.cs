@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using StudentManagement.API.DTOs.Requests;
 using StudentManagement.API.Services;
 
@@ -16,6 +17,7 @@ namespace StudentManagement.API.Controllers
             _authService = authService;
         }
 
+        [EnableRateLimiting("fixed")]
         [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login(LoginRequestDto dto)
